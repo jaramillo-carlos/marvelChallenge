@@ -11,6 +11,9 @@ import {HttpClientModule} from '@angular/common/http';
     NotFoundComponent,
     LoaderComponent
   ],
+  exports: [
+    LoaderComponent
+  ],
   imports: [
     BrowserAnimationsModule,
     HttpClientModule
