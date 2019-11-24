@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {debounceTime} from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  searchField: FormControl = new FormControl();
+  @Output() searchCharacter = new EventEmitter();
 
-  ngOnInit() {
+  constructor() {
   }
 
+  ngOnInit() {
+    this.searchField.valueChanges
+      .pipe(
+        debounceTime(300)
+      )
+      .subscribe(
+        keyword => this.searchCharacter.emit(keyword)
+      );
+
+  }
 }

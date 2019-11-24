@@ -17,6 +17,8 @@ const COMPONENTS = [
     ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     FlexLayoutModule,
     MaterialModule
   ],
