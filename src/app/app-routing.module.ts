@@ -5,6 +5,15 @@ import {NotFoundComponent} from './core/layouts/not-found/not-found.component';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'site',
+    pathMatch: 'full'
+  },
+  {
+    path: 'site',
+    loadChildren: () => import('./site/site.module').then(m => m.SiteModule)
+  },
+  {
     path: 'not-found',
     component: NotFoundComponent,
   },
