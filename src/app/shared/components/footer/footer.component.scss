@@ -1,0 +1,10 @@
+@import "src/app/core/styles/_variables.scss";
+
+footer{
+  background-color: $background-color;
+}
+
+.footer-copyright {
+  padding: 3em;
+  color: gray;
+}

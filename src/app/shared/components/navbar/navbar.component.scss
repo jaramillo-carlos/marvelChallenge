@@ -1,0 +1,22 @@
+@import "src/app/core/styles/_variables.scss";
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 998;
+  background-color: $background-color;
+
+  .brand {
+    height: 85%;
+  }
+
+  .search-box {
+    width: 100%;
+    font-size: 0.7em;
+    padding: 0.8em;
+    border-radius: 5px;
+    border: 0;
+    background: #fbfbfb url("/assets/icons/search.png") no-repeat right;
+  }
+}
