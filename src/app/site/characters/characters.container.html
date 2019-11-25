@@ -1,0 +1,14 @@
+<div
+  class="char-list-bodychar"
+  fxLayout="row wrap"
+  fxLayout.xs="column"
+  fxLayoutGap="10px">
+  <!--
+  <app-hero-detail *ngFor="let character of characters" [char]="character"></app-hero-detail>-->
+  <div
+    *ngFor="let character of allCharacters | async"
+    fxFlex="45%"
+    fxFlex.lt-lg="100%">
+    <app-character [character]="character"></app-character>
+  </div>
+</div>

@@ -1,19 +1,14 @@
 <app-navbar (searchCharacter)="onSearch($event)"></app-navbar>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
+<br/>
+<br/>
+<br/>
+<br/>
+<div
+  class="char-list-bodychar"
+  fxLayout="row wrap"
+  fxLayout.xs="column"
+  fxLayoutGap="10px">
+  <app-characters [keyword]="keyword" fxFlex="80%"></app-characters>
+  <div fxFlex="20%"></div>
+</div>
 <app-footer></app-footer>

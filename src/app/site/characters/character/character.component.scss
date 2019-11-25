@@ -1,0 +1,80 @@
+@import "src/app/core/styles/_variables.scss";
+/* Character Container */
+
+.img-wrapper{
+  padding-top: 2em;
+  width:11em;
+  height:12em;
+}
+
+.img-wrapper > img{
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  width: 13em;
+  height: 13em;
+  top: -4.5em;
+  left: -1.5em;
+}
+
+.character-panel{
+  margin: 2em auto;
+  background-color: #fff;
+  width: 90%;
+  height: 22em;
+  color: #3E3C3D;
+  padding-bottom: 0em;
+}
+
+/* Character bio */
+
+.character-title{
+  font-size: 1.5em;
+  position: relative;
+  top: -0.7em;
+  text-transform: uppercase;
+
+}
+
+.character-description{
+  font-variant: small-caps;
+  font-size: 0.9em;
+  position: relative;
+  top: -1em;
+  padding: 1em 2em 1em 0;
+}
+
+.character-button {
+  font-size: 0.8em;
+  font-weight: bolder;
+  padding: 0.8em 1em;
+  border: 0;
+  background-color: red;
+  color: white;
+}
+
+@media (max-width: 1280px) {
+  .img-wrapper > img{
+    height: 13em;
+    width: 13em;
+  }
+}
+
+/* Character comics */
+
+.related-comics {
+  font-variant: small-caps;
+  padding: 2em;
+  list-style: none;
+  h3 {
+    color: #3E3C3D;
+    font-size: 1.5em;
+    padding-bottom: 0.5em;
+
+  }
+}
+
+.char-comics {
+  color: #3E3C3D;
+  font-size: 1em;
+}
