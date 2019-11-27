@@ -14,7 +14,7 @@ import {LoaderService} from '@services/loader.service';
 // tslint:disable-next-line:component-class-suffix
 export class CharactersContainer implements OnInit, OnChanges {
   @Input() keyword: string;
-  config: any;
+  // config: any;
   allCharacters: Observable<Array<Character>>;
   page: number = 1;
   public order: string = 'name';
@@ -22,7 +22,7 @@ export class CharactersContainer implements OnInit, OnChanges {
   constructor(
     private marvelApiService: MarvelApiService,
     private loaderService: LoaderService,
-    private route: ActivatedRoute,
+    // private route: ActivatedRoute,
     private adapter: CharacterAdapter
   ) {
     /*
@@ -59,8 +59,6 @@ export class CharactersContainer implements OnInit, OnChanges {
 
   sortSearch(newValueSortBy: string) {
     this.order = newValueSortBy;
-    console.log('cambio');
     this.getCharacters(this.order, this.keyword);
   }
-
 }
