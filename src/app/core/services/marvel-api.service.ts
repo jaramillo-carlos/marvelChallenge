@@ -15,7 +15,7 @@ export class MarvelApiService {
   TS = new Date().getTime();
   PAGE_LIMIT = '100';
   HASH = Md5.hashStr(`${this.TS}${BACKEND_DATA.private_key}${BACKEND_DATA.public_key}`);
-  AUTH = `ts=${this.TS}&apikey=${BACKEND_DATA.public_key}&hash=${this.HASH}`;
+  AUTH = `?ts=${this.TS}&apikey=${BACKEND_DATA.public_key}&hash=${this.HASH}`;
   API_URL = `${BACKEND_DATA.host}${HttpApi.marvelCharacters}${this.AUTH}`;
 
 
@@ -37,7 +37,7 @@ export class MarvelApiService {
   }
 
   getComicDataFromUrl(url: string) {
-    url = url.replace('http://gateway.marvel.com/', 'https://gateway.marvel.com:443/');
-    return this.http.get<any>(`${url}?${this.AUTH}`);
+    url = url.split('/').pop();
+    return this.http.get<any>(`${BACKEND_DATA.host}${HttpApi.marvelComicByID}${url}${this.AUTH}`);
   }
 }

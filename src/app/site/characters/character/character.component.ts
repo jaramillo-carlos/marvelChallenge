@@ -27,7 +27,6 @@ export class CharacterComponent implements OnInit {
     });
     const dialogSubmitSubscription = this.DialogRef.componentInstance.comicClicked
       .subscribe(result => {
-        console.log('Got the data!', result);
         dialogSubmitSubscription.unsubscribe();
         this.showComicDescription(result);
       });
