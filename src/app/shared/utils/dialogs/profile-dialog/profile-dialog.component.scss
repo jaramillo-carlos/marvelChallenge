@@ -12,18 +12,25 @@
 }
 
 .mat-dialog-actions {
-  padding: 0px;
+  padding: 0;
   margin: -24px;
+}
 
+.img-comic {
+  padding: 1em;
+}
+img-comic:hover {
+  border: solid black 1px;
 }
 
 .modal-buttons {
   a {
-    padding: 1em;
+    padding: 1em 0;
     font-weight: bold;
     font-size: 1.3em;
     text-transform: uppercase;
     position: relative;
+    cursor: pointer;
   }
 
   .left-button {
@@ -34,6 +41,7 @@
   .right-button {
     color: RED;
     background-color: #DCDCDC;
+
     small {
       font-size: 0.5em;
       position: absolute;
@@ -41,4 +49,9 @@
       right: 10%;
     }
   }
+}
+
+
+.container-profile {
+  padding-bottom: 4em;
 }
