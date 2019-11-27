@@ -20,7 +20,7 @@
   <ul class="related-comics">
     <li *ngFor="let comic of data.allComics">
       <div class="related-comic">
-        <a href="#" (click)="closebtn.click(); callModal(comic.resourceURI)" class="char-comics">{{comic.name}}</a>
+        <a [mat-dialog-close]="true" (click)="showComicDescription(comic)" class="char-comics">{{comic.name}}</a>
       </div>
     </li>
   </ul>

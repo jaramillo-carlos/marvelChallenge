@@ -15,9 +15,10 @@ export class Character {
     this.thumbnail = `${object.thumbnail.path}.${object.thumbnail.extension}`;
     this.description = object.description ? object.description : 'Description not available';
     this.allComics = object.comics.items;
-    this.comicList = this.getRandomComicList(4);
+    // this.comicList = this.getRandomComicList(4);
   }
 
+  /*
   getRandomComicList(size: number = 4) {
     const list = [];
     if (this.allComics.length) {
@@ -27,6 +28,7 @@ export class Character {
     }
     return list;
   }
+  */
 }
 
 @Injectable({

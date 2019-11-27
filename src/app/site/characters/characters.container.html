@@ -1,14 +1,34 @@
 <div
-  class="char-list-bodychar"
-  fxLayout="row wrap"
-  fxLayout.xs="column"
-  fxLayoutGap="10px">
-  <!--
-  <app-hero-detail *ngFor="let character of characters" [char]="character"></app-hero-detail>-->
+  class="characters-list">
+  <div fxLayout="row" fxFLex fxLayoutAlign="space-between">
+    <h2 fxLayoutAlign="center center">
+      <img class="img-fluid" src="assets/icons/characters.png" alt="MarvelComics"/>Characters
+    </h2>
+    <div>
+      <select #sortBy id="SelectedSortBy" class="order-select" (change)="sortSearch(sortBy.value)">
+        <option value="name">Name</option>
+        <option value="-name">Name Descending</option>
+        <option value="modified">Modified</option>
+        <option value="-modified">Modified Descending</option>
+      </select>
+    </div>
+  </div>
   <div
-    *ngFor="let character of allCharacters | async"
-    fxFlex="45%"
-    fxFlex.lt-lg="100%">
-    <app-character [character]="character"></app-character>
+    class="characters-list"
+    fxLayout="row wrap"
+    fxLayout.xs="column"
+    fxLayoutGap="10px">
+    <div
+      *ngFor="let character of allCharacters | async | paginate: { itemsPerPage: 10, currentPage: page } ; let i = index"
+      fxFlex="49%"
+      fxFlex.lt-lg="100%">
+      <app-character [character]="character"></app-character>
+    </div>
+  </div>
+  <div class="pagination">
+    <div align="center">
+      <pagination-controls (pageChange)="page = $event" class="paginator" previousLabel=""
+                           nextLabel=""></pagination-controls>
+    </div>
   </div>
 </div>

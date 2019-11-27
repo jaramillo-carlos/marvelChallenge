@@ -5,6 +5,7 @@ import {SiteComponent} from './site.component';
 import {SharedModule} from '../shared/shared.module';
 import {CharactersContainer} from './characters/characters.container';
 import { CharacterComponent } from './characters/character/character.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { CharacterComponent } from './characters/character/character.component';
   ],
   imports: [
     SharedModule,
-    SiteRoutingModule
+    SiteRoutingModule,
+    NgxPaginationModule
   ]
 })
 export class SiteModule {

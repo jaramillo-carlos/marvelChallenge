@@ -16,6 +16,8 @@ export class CharactersContainer implements OnInit, OnChanges {
   @Input() keyword: string;
   config: any;
   allCharacters: Observable<Array<Character>>;
+  page: number = 1;
+  public order: string = 'name';
 
   constructor(
     private marvelApiService: MarvelApiService,
@@ -23,33 +25,42 @@ export class CharactersContainer implements OnInit, OnChanges {
     private route: ActivatedRoute,
     private adapter: CharacterAdapter
   ) {
-    this.config = {
-      itemsPerPage: 10,
-      currentPage: 1,
-      pages: 1,
-      totalItems: 0
-    };
-    route.queryParams.subscribe(params => this.config.currentPage = params.page ? (params.page - 1) * this.config.itemsPerPage : 1);
+    /*
+     For paginate in server
+     this.config = {
+       itemsPerPage: 10,
+       currentPage: 1,
+       pages: 1,
+       totalItems: 0
+     };
+    */
   }
 
   ngOnInit() {
-    this.getCharacters(this.config.currentPage, this.keyword);
+    this.getCharacters(this.order, this.keyword);
   }
 
   ngOnChanges() {
-    this.getCharacters(this.config.currentPage, this.keyword);
+    this.getCharacters(this.order, this.keyword);
   }
 
-  getCharacters(offset, keyword?) {
+  getCharacters(order, keyword?) {
     this.loaderService.show();
-    this.allCharacters = this.marvelApiService.getAllCharacters(offset, keyword)
+    this.allCharacters = this.marvelApiService.getAllCharacters(order, keyword)
       .pipe(
         map(data => {
-          this.config.totalItems = data.total;
-          this.config.pages = Math.ceil(data.total / this.config.pages.itemsPerPage);
+          // this.config.totalItems = data.total;
+          // this.config.pages = Math.ceil(data.total / this.config.pages.itemsPerPage);
           return data.results.map(character => this.adapter.adapt(character));
         }),
         finalize(() => this.loaderService.hide())
       );
   }
+
+  sortSearch(newValueSortBy: string) {
+    this.order = newValueSortBy;
+    console.log('cambio');
+    this.getCharacters(this.order, this.keyword);
+  }
+
 }

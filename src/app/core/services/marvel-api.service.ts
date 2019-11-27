@@ -13,17 +13,17 @@ const BACKEND_DATA = environment.backend;
 })
 export class MarvelApiService {
   TS = new Date().getTime();
-  PAGE_LIMIT = '10';
+  PAGE_LIMIT = '100';
   HASH = Md5.hashStr(`${this.TS}${BACKEND_DATA.private_key}${BACKEND_DATA.public_key}`);
   API_URL = `${BACKEND_DATA.host}${HttpApi.marvelCharacters}ts=${this.TS}&apikey=${BACKEND_DATA.public_key}&hash=${this.HASH}`;
 
   constructor(private http: HttpClient) {
   }
 
-  getAllCharacters(offset: number, keyword?: string, orderBy: string = 'name'): Observable<any> {
+  getAllCharacters(orderBy: string = 'name', keyword?: string): Observable<any> {
     let params = new HttpParams();
     params = params.append('limit', this.PAGE_LIMIT);
-    params = params.append('offset', String(offset));
+    // params = params.append('offset', String(offset));
     params = params.append('orderBy', orderBy);
     if (keyword) {
       params = params.append('nameStartsWith', keyword);
