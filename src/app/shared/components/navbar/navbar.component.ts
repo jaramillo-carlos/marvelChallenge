@@ -2,27 +2,32 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {debounceTime} from 'rxjs/operators';
 
+declare var $: any;
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-
-  searchField: FormControl = new FormControl();
+  searchCharacterField: FormControl = new FormControl();
   @Output() searchCharacter = new EventEmitter();
 
   constructor() {
   }
 
   ngOnInit() {
-    this.searchField.valueChanges
+    this.searchCharacterField.valueChanges
       .pipe(
         debounceTime(300)
       )
       .subscribe(
         keyword => this.searchCharacter.emit(keyword)
       );
-
   }
+
+  public favouritesCollapse() {
+    $('#favourites, #characters').toggleClass('active');
+  }
+
 }
