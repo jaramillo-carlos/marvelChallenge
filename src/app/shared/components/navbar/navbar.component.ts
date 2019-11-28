@@ -26,8 +26,4 @@ export class NavbarComponent implements OnInit {
       );
   }
 
-  public favouritesCollapse() {
-    $('#favourites, #characters').toggleClass('active');
-  }
-
 }

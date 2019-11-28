@@ -1,29 +1,29 @@
-<div>
-  <div class="character-panel">
-    <div fxLayout="row">
-      <div fxFlex="40%" fxFlex.lt-md="50%" class="img-wrapper">
-        <img [src]="character.thumbnail" class="mat-elevation-z4" alt="Character-thumbnail">
-      </div>
-      <div fxFlex="55%" fxFlexOffset="5%" fxFlex.lt-md="50%">
-        <h1 class="character-title">{{character.name | uppercase}} </h1>
-        <p class="character-description">
-          {{character.description | slice:0:150}}
-          <span [hidden]="character.description.length < 150">...</span>
-        </p>
-        <a (click)="showCharacterProfile()" class="character-button">VIEW MORE</a>
-      </div>
+<div class="container-fluid character-panel">
+  <div class="row">
+    <div class="col-6 img-wrapper">
+      <img [src]="character.thumbnail" class="shadow-sm img-thumbnail" alt="Character-thumbnail">
     </div>
-    <div class="comics-container">
-      <ul class="related-comics" fxLayout="row wrap" *ngIf="character.allComics.length > 0">
-        <h3 class="h6" fxFlex="100%">Related Comics</h3>
-        <li *ngFor="let comic of character.allComics.slice(0, 4)" fxFlex="50%" fxFlex.lt-md="100%">
-          <div class="related-comic" fxFlex>
-            <a (click)="showComicDescription(comic)" class="char-comics">{{comic.name | slice:0:30}}</a>
-          </div>
-        </li>
-      </ul>
-      <p *ngIf="character.allComics.length <= 0" align="center">Character don't have Comics</p>
+    <div class="col-6">
+      <h1 class="character-title">{{character.name | uppercase}} </h1>
+      <p class="character-description">
+        {{character.description | slice:0:100}}
+        <span [hidden]="character.description.length < 100">...</span>
+      </p>
+      <a (click)="showCharacterProfile()" class="character-button">VIEW MORE</a>
     </div>
+  </div>
+  <div class="container-fluid comics-container">
+    <div class="row">
+      <h3 class="related-comics_title">Related Comics</h3>
+    </div>
+    <ul class="related-comics row" *ngIf="character.allComics.length > 0">
+      <li *ngFor="let comic of character.allComics.slice(0, 4)" class="col-6">
+        <div class="related-comic">
+          <a (click)="showComicDescription(comic)" class="char-comics">{{comic.name | slice:0:25}}</a>
+        </div>
+      </li>
+    </ul>
+    <p *ngIf="character.allComics.length <= 0" align="center">Character don't have Comics</p>
   </div>
 </div>
 

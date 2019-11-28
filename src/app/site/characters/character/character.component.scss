@@ -1,36 +1,32 @@
 @import "src/app/core/styles/_variables.scss";
-/* Character Container */
 
 .character-panel {
   margin: 2em auto;
   background-color: #fff;
-  width: 90%;
-  height: 23em;
   color: #786E6D;
-  padding-bottom: 0em;
+  padding-bottom: 1.5em;
 }
-
-/* Character bio */
-
 
 .img-wrapper {
   padding-top: 2em;
-  width: 11em;
-  height: 12em;
+}
+
+.img-thumbnail {
+  padding: 0;
 }
 
 .img-wrapper > img {
   border-radius: 50%;
   display: inline-block;
   position: relative;
-  width: 13em;
-  height: 13em;
   top: -4.5em;
   left: -1.5em;
+  height: 14em;
 }
 
 .character-title {
   font-size: 1.5em;
+  font-weight: bolder;
   position: relative;
   top: -0.7em;
   text-transform: uppercase;
@@ -53,14 +49,9 @@
   color: white;
 }
 
-@media (max-width: 1280px) {
-  .img-wrapper > img {
-    height: 13em;
-    width: 13em;
-  }
+.comics-container {
+  margin-top: -4em;
 }
-
-/* Character comics */
 
 .char-comics {
   color: #786E6D;
@@ -75,13 +66,23 @@
 }
 
 .related-comics {
-  padding: 2em;
   list-style: none;
+}
 
-  h3 {
-    color: $background-color;
-    font-size: 1.5em;
-    padding-bottom: 0.5em;
+.related-comics_title {
+  color: $background-color;
+  font-size: 1.5em;
+  font-weight: bolder;
+  padding-bottom: 0.5em;
+}
 
+
+@media (max-width: 1280px) {
+  .img-wrapper > img {
+    height: 12em;
+  }
+  .comics-container {
+    margin-top: -2em;
   }
 }
+

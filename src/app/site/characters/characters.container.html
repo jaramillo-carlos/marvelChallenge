@@ -1,48 +1,47 @@
-<div class="wrapper">
-  <div id="characters" class="container-fluid">
-    <div class="row characters-options">
-      <div class="col-12 col-md-6 d-flex align-items-center">
-        <h2 class="characters-list_title">
-          <img class="img-fluid" src="assets/icons/characters.png" alt="MarvelComics"/>Characters
-        </h2>
-      </div>
-      <div class="col-12 col-md-6 text-right">
-        <select #sortBy id="SelectedSortBy" class="order-select" (change)="sortSearch(sortBy.value)">
-          <option value="name">Name</option>
-          <option value="-name">Name Descending</option>
-          <option value="modified">Modified</option>
-          <option value="-modified">Modified Descending</option>
-        </select>
-      </div>
-    </div>
-    <div class="row">
-      <div
-        class="characters-list"
-        fxLayout="row wrap"
-        fxLayout.xs="column"
-        fxLayoutGap="10px">
-        <div
-          *ngFor="let character of allCharacters | async | paginate: { itemsPerPage: 10, currentPage: page } ; let i = index"
-          fxFlex="49%"
-          fxFlex.lt-lg="100%">
-          <app-character [character]="character"></app-character>
+<div class="container-fluid page">
+  <div class="row">
+    <div id="characters" class="col-12 col-md-8 col-lg-9">
+      <div class="row characters-options">
+        <div class="col-6 col-md-6 d-flex align-items-center">
+          <h2 class="characters-list_title">
+            <img class="img-fluid" src="assets/icons/characters.png" alt="MarvelComics"/>Characters
+          </h2>
+        </div>
+        <div class="col-6 col-md-6 text-right">
+          <select #sortBy id="SelectedSortBy" class="order-select" (change)="sortSearch(sortBy.value)">
+            <option value="name">Name</option>
+            <option value="-name">Name Descending</option>
+            <option value="modified">Modified</option>
+            <option value="-modified">Modified Descending</option>
+          </select>
         </div>
       </div>
-      <div class="pagination">
-        <div align="center">
-          <pagination-controls (pageChange)="page = $event" class="paginator" previousLabel=""
-                               nextLabel=""></pagination-controls>
-        </div>
-      </div>
-    </div>
+      <div class="container">
 
+
+        <div class="row characters-list">
+          <div class="col-12 col-lg-6"
+               *ngFor="let character of allCharacters | async | paginate: { itemsPerPage: 10, currentPage: page }">
+            <app-character [character]="character"></app-character>
+          </div>
+
+          <div class="pagination">
+            <div align="center">
+              <pagination-controls (pageChange)="page = $event" class="paginator" previousLabel=""
+                                   nextLabel=""></pagination-controls>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <section id="favourites" class="col-12 order-first col-md-4 col-lg-3 order-md-last">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h3 class="favourites-list_title">
+            <img src="assets/icons/favourites.png"
+                 style="max-width:50px" alt="favourites-icon"> My Favourites</h3>
+        </div>
+      </div>
+    </section>
   </div>
-
-  <section id="favourites" class="container">
-    <div class="row">
-      <div class="col-md-12 text-xs-left text-md-center">
-        <h3 class="favourites-list_title"><img class="d-none d-md-inline-block" src="assets/icons/favourites.png" style="max-width:30px" alt="favourites-icon"> My Favourites</h3>
-      </div>
-    </div>
-  </section>
 </div>
