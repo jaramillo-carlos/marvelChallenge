@@ -31,3 +31,11 @@ a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, bo
 }
 
 
+body.modal-open app-root app-site app-characters .page,
+body.modal-open app-root app-site app-navbar nav {
+  webkit-filter: blur(20px);
+  -moz-filter: blur(20px);
+  -o-filter: blur(20px);
+  -ms-filter: blur(20px);
+  filter: blur(20px);
+}
