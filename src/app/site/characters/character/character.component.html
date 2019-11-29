@@ -9,7 +9,7 @@
         {{character.description | slice:0:100}}
         <span [hidden]="character.description.length < 100">...</span>
       </p>
-      <a (click)="showCharacterProfile()" class="character-button">VIEW MORE</a>
+      <a (click)="openModalCharacter(character)" class="character-button">VIEW MORE</a>
     </div>
   </div>
   <div class="container-fluid comics-container">
@@ -19,11 +19,11 @@
     <ul class="related-comics row" *ngIf="character.allComics.length > 0">
       <li *ngFor="let comic of character.allComics.slice(0, 4)" class="col-6">
         <div class="related-comic">
-          <a (click)="showComicDescription(comic)" class="char-comics">{{comic.name | slice:0:25}}</a>
+          <a  href="javascript:void(0)" (click)="openModalComic(comic)" class="char-comics">{{comic.name | slice:0:25}}</a>
         </div>
       </li>
     </ul>
-    <p *ngIf="character.allComics.length <= 0" align="center">Character don't have Comics</p>
+    <p *ngIf="character.allComics.length <= 0">Character don't have Comics</p>
   </div>
 </div>
 

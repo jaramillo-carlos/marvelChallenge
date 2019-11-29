@@ -2,14 +2,14 @@ export class Comic {
   id: number;
   title: string;
   description: string;
-  price: string;
+  prices: string;
   thumbnail: Thumbnail;
 
-  constructor(id: number, title: string, description: string, price: string, path: string, extension: string) {
+  constructor(id: number, title: string, description: string, prices: string, path: string, extension: string) {
     this.id = id;
     this.title = title;
     this.description = description;
-    this.price = price;
+    this.prices = prices;
     this.thumbnail = new Thumbnail(path, extension);
   }
 }

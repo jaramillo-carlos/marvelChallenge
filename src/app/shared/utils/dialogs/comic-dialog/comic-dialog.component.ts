@@ -40,7 +40,6 @@ export class ComicDialogComponent implements OnInit {
 
   addToFavourites() {
     this.favourites = this.favouriteComicsService.getAll();
-    console.log(this.favourites);
     const existComic = this.favourites.filter(eachComic => eachComic.id === this.comic.id);
     if (existComic.length === 0) {
       this.favourites.push(this.comic);

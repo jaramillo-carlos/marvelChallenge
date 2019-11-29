@@ -5,6 +5,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {finalize, map} from 'rxjs/operators';
 import {Character, CharacterAdapter} from '@core/character.model';
 import {LoaderService} from '@services/loader.service';
+import {Comic} from '@core/comic.model';
+
+declare var $: any;
 
 @Component({
   selector: 'app-characters',
@@ -17,7 +20,18 @@ export class CharactersContainer implements OnInit, OnChanges {
   // config: any;
   allCharacters: Observable<Array<Character>>;
   page: number = 1;
+  comic: Comic = {
+    id: 0,
+    title: '',
+    description: '',
+    prices: '',
+    thumbnail: null
+  };
   public order: string = 'name';
+
+  // Object de favoritos
+  objFavourites = {};
+  arrayFavourites = [];
 
   constructor(
     private marvelApiService: MarvelApiService,
@@ -25,6 +39,7 @@ export class CharactersContainer implements OnInit, OnChanges {
     // private route: ActivatedRoute,
     private adapter: CharacterAdapter
   ) {
+    this.getAllFovourites();
     /*
      For paginate in server
      this.config = {
@@ -44,6 +59,15 @@ export class CharactersContainer implements OnInit, OnChanges {
     this.getCharacters(this.order, this.keyword);
   }
 
+  openModalComic(event): void {
+    this.comic = event;
+    $('#comicModal').modal('toggle');
+  }
+
+  openModalCharacter(event): void {
+    $('#characterModal').modal('toggle');
+  }
+
   getCharacters(order, keyword?) {
     this.loaderService.show();
     this.allCharacters = this.marvelApiService.getAllCharacters(order, keyword)
@@ -60,5 +84,36 @@ export class CharactersContainer implements OnInit, OnChanges {
   sortSearch(newValueSortBy: string) {
     this.order = newValueSortBy;
     this.getCharacters(this.order, this.keyword);
+  }
+
+  addFavourite(item: any): boolean {
+    this.objFavourites[item.id] = item;
+    localStorage.setItem('favourites', JSON.stringify(this.objFavourites));
+    this.getAllFovourites();
+    return true;
+  }
+
+  removeFavourite(id): void {
+    delete this.objFavourites[id];
+    localStorage.setItem('favourites', JSON.stringify(this.objFavourites));
+    this.getAllFovourites();
+  }
+
+  private getAllFovourites(): void {
+    const comics = JSON.parse(localStorage.getItem('favourites')) || {};
+    this.objFavourites = comics;
+    this.arrayFavourites = Object.values(this.objFavourites);
+  }
+
+  isFavourite(id: number) {
+    return id in this.objFavourites;
+  }
+
+  getComicPrice(prices) {
+    return prices ? prices[0].price : '';
+  }
+
+  buyComic() {
+
   }
 }

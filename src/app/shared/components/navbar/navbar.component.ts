@@ -2,8 +2,6 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {debounceTime} from 'rxjs/operators';
 
-declare var $: any;
-
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',

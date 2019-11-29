@@ -17,16 +17,17 @@
         </div>
       </div>
       <div class="container">
-
-
         <div class="row characters-list">
           <div class="col-12 col-lg-6"
                *ngFor="let character of allCharacters | async | paginate: { itemsPerPage: 10, currentPage: page }">
-            <app-character [character]="character"></app-character>
+            <app-character
+              (selectedComic)="openModalComic($event)"
+              (selectedCharacter)="openModalCharacter($event)"
+              [character]="character">
+            </app-character>
           </div>
-
-          <div class="pagination">
-            <div align="center">
+          <div class="col-12">
+            <div class="pagination text-center d-flex justify-content-center">
               <pagination-controls (pageChange)="page = $event" class="paginator" previousLabel=""
                                    nextLabel=""></pagination-controls>
             </div>
@@ -39,9 +40,60 @@
         <div class="col-md-12 text-center">
           <h3 class="favourites-list_title">
             <img src="assets/icons/favourites.png"
-                 style="max-width:50px" alt="favourites-icon"> My Favourites</h3>
+                 style="max-width:50px" alt="favourites-icon"> My Favourites
+          </h3>
+          <div class="card text-center card-favourite" *ngFor="let comic of arrayFavourites; let i=index">
+            <a href="javascript:void(0)" (click)="removeFavourite(comic.id)" class="btn-delete">
+              <img src="assets/icons/btn-delete.png" class="favourite-button_delete" alt="delete-button">
+            </a>
+            <img class="card-img-top" [src]="comic.thumbnail.path + '.' + comic.thumbnail.extension" alt="">
+            <div class="card-body">
+              <p class="favourite-title">{{comic.title}}</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
+  </div>
+</div>
+
+
+<div class="modal fade" id="comicModal" tabindex="-1" role="dialog" aria-labelledby="comicModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-md" style="max-width:600px" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <img alt="close-profile" src="assets/icons/btn-close.png">
+        </button>
+        <div class="row">
+          <div class="col-md-4">
+            <img *ngIf="comic.thumbnail" [src]="comic.thumbnail.path + '.' + comic.thumbnail.extension"
+                 class="img-fluid" alt="">
+          </div>
+          <div class="col-md-8">
+            <h4 class="modal-title_comic">{{comic.title}}</h4>
+            <p>{{comic.description || 'Not description...'}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center text-center">
+        <a class="align-self-stretch flex-fill left-button" *ngIf="!isFavourite(comic.id); else comicFavourite"
+           (click)="addFavourite(comic)">
+          <img class="img-fluid" src="assets/icons/btn-favourites-primary.png" alt="Favourites"/>
+          ADD TO FAVOURITES
+        </a>
+        <ng-template #comicFavourite>
+          <a class="align-self-stretch flex-fill left-button blocked">
+            <img class="img-fluid" src="assets/icons/btn-favourites-default.png" alt="Favourites"/>
+            ADDED TO FAVOURITES
+          </a>
+        </ng-template>
+        <a data-dismiss="modal" class="align-self-stretch flex-fill right-button" (click)="buyComic();">
+          <img class="img-fluid" src="assets/icons/shopping-cart-primary.png" alt="buy"/>
+          BUY FOR ${{getComicPrice(comic.prices) || 0}}
+        </a>
+      </div>
+    </div>
   </div>
 </div>

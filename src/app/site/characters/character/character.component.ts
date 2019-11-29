@@ -1,8 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Character} from '@core/character.model';
-import {MatDialog, MatDialogRef} from '@angular/material';
-import {ProfileDialogComponent} from '../../../shared/utils/dialogs/profile-dialog/profile-dialog.component';
-import {ComicDialogComponent} from '../../../shared/utils/dialogs/comic-dialog/comic-dialog.component';
+import {MarvelApiService} from '@services/marvel-api.service';
+import {LoaderService} from '@services/loader.service';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-character',
@@ -11,17 +11,35 @@ import {ComicDialogComponent} from '../../../shared/utils/dialogs/comic-dialog/c
 })
 export class CharacterComponent implements OnInit {
   @Input() character: Character;
-  private DialogRef: MatDialogRef<ProfileDialogComponent, any>;
+
+  @Output() public selectedComic = new EventEmitter();
+  @Output() public selectedCharacter = new EventEmitter();
 
   constructor(
-    public dialog: MatDialog
+    private marvelApiService: MarvelApiService,
+    private loaderService: LoaderService
   ) {
   }
 
   ngOnInit() {
   }
 
+  openModalComic(comic) {
+    this.loaderService.show();
+    this.marvelApiService.getComicDataFromUrl(comic.resourceURI).subscribe(data => {
+        this.selectedComic.emit(data.data.results[0]);
+      }, (error) => {
+        console.log(error);
+      },
+      () => this.loaderService.hide());
+  }
+
+  openModalCharacter(character) {
+    this.selectedCharacter.emit(character);
+  }
+
   showCharacterProfile() {
+    /*
     this.DialogRef = this.dialog.open(ProfileDialogComponent, {
       data: this.character,
     });
@@ -29,12 +47,14 @@ export class CharacterComponent implements OnInit {
       .subscribe(result => {
         dialogSubmitSubscription.unsubscribe();
         this.showComicDescription(result);
-      });
+      });*/
   }
 
   showComicDescription(comic) {
+    /*
     this.dialog.open(ComicDialogComponent, {
       data: comic.resourceURI,
     });
+    */
   }
 }
