@@ -1,15 +1,17 @@
 <div class="container-fluid character-panel">
   <div class="row">
-    <div class="col-6 img-wrapper">
-      <img [src]="character.thumbnail" class="shadow-sm img-thumbnail" alt="Character-thumbnail">
+    <div class="col-4 col-lg-6 img-wrapper">
+      <img [src]="character.thumbnail" class="shadow-sm img-fluid img-thumbnail" alt="Character-thumbnail">
     </div>
-    <div class="col-6">
+    <div class="col-8 col-lg-6 character-text">
       <h1 class="character-title">{{character.name | uppercase}} </h1>
       <p class="character-description">
         {{character.description | slice:0:100}}
         <span [hidden]="character.description.length < 100">...</span>
       </p>
-      <a (click)="openModalCharacter(character)" class="character-button">VIEW MORE</a>
+      <div class="character-container_button">
+        <a (click)="openModalCharacter(character)" class="character-button">VIEW MORE</a>
+      </div>
     </div>
   </div>
   <div class="container-fluid comics-container">
@@ -19,7 +21,8 @@
     <ul class="related-comics row" *ngIf="character.allComics.length > 0">
       <li *ngFor="let comic of character.allComics.slice(0, 4)" class="col-6">
         <div class="related-comic">
-          <a  href="javascript:void(0)" (click)="openModalComic(comic)" class="char-comics">{{comic.name | slice:0:25}}</a>
+          <a href="javascript:void(0)" (click)="openModalComic(comic)" class="char-comics">{{comic.name | slice:0:15}}
+            ...{{comic.name | slice:-10}}</a>
         </div>
       </li>
     </ul>

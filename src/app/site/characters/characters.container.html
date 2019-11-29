@@ -7,7 +7,7 @@
             <img class="img-fluid" src="assets/icons/characters.png" alt="MarvelComics"/>Characters
           </h2>
         </div>
-        <div class="col-6 col-md-6 text-right">
+        <div class="col-6 col-md-6 text-left text-md-right text-lg-right ">
           <select #sortBy id="SelectedSortBy" class="order-select" (change)="sortSearch(sortBy.value)">
             <option value="name">Name</option>
             <option value="-name">Name Descending</option>
@@ -35,7 +35,7 @@
         </div>
       </div>
     </div>
-    <section id="favourites" class="col-12 order-first col-md-4 col-lg-3 order-md-last">
+    <section id="favourites" class="col-12 order-first col-md-4 col-lg-3 order-md-last pb-4">
       <div class="row">
         <div class="col-md-12 text-center">
           <h3 class="favourites-list_title">
