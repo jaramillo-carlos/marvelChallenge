@@ -1,8 +1,8 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {MarvelApiService} from '@services/marvel-api.service';
-import {Observable, pipe} from 'rxjs';
+import {Observable, of, pipe} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
-import {finalize, map} from 'rxjs/operators';
+import {catchError, finalize, map} from 'rxjs/operators';
 import {Character, CharacterAdapter} from '@core/character.model';
 import {LoaderService} from '@services/loader.service';
 import {Comic} from '@core/comic.model';
@@ -28,10 +28,17 @@ export class CharactersContainer implements OnInit, OnChanges {
     thumbnail: null
   };
   public order: string = 'name';
-
-  // Object de favoritos
   objFavourites = {};
   arrayFavourites = [];
+  character: Character = {
+    name: '',
+    id: '',
+    thumbnail: '',
+    description: '',
+    comicList: [],
+    allComics: []
+  };
+  characterComics: Array<Comic>;
 
   constructor(
     private marvelApiService: MarvelApiService,
@@ -65,6 +72,8 @@ export class CharactersContainer implements OnInit, OnChanges {
   }
 
   openModalCharacter(event): void {
+    this.character = event;
+    this.getComicsByCharacter(event.id);
     $('#characterModal').modal('toggle');
   }
 
@@ -115,5 +124,19 @@ export class CharactersContainer implements OnInit, OnChanges {
 
   buyComic() {
 
+  }
+
+  addRandomFavourites(id: string) {
+
+  }
+
+  private getComicsByCharacter(id: any) {
+    this.loaderService.show();
+    this.marvelApiService.getComicsByCharacter(id).subscribe(data => {
+      this.characterComics = data.results;
+      this.loaderService.hide();
+    }, (error) => {
+      console.log(error);
+    });
   }
 }

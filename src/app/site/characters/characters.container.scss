@@ -40,6 +40,15 @@
   position: absolute;
 }
 
+.comic-item {
+  cursor: pointer;
+
+  small:hover {
+    color: red;
+    font-weight: bolder;
+  }
+}
+
 .card-favourite {
   margin: 1em 4em;
   background: transparent;
@@ -122,6 +131,7 @@
     background-color: #f0f0f0;
 
   }
+
   a.left-button.blocked {
     color: $background-color;
     cursor: not-allowed;

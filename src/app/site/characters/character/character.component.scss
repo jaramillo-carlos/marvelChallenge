@@ -40,6 +40,7 @@
 }
 
 .character-button {
+  cursor: pointer;
   font-size: 0.8em;
   font-weight: bolder;
   padding: 0.8em 1em;
@@ -47,7 +48,12 @@
   background-color: red;
   color: white;
   display: inline-block;
+
+  &:hover {
+    color: white;
+  }
 }
+
 
 .comics-container {
   margin-top: -4em;
@@ -84,8 +90,5 @@
   }
   .comics-container {
     margin-top: 0;
-  }
-  .character-container_button {
-    text-align: right;
   }
 }

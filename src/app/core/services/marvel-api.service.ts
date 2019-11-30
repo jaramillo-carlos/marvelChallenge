@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
+import {Observable, of, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {Md5} from 'ts-md5/dist/md5';
 import {environment} from '@environments/environment';
@@ -16,7 +16,7 @@ export class MarvelApiService {
   PAGE_LIMIT = '100';
   HASH = Md5.hashStr(`${this.TS}${BACKEND_DATA.private_key}${BACKEND_DATA.public_key}`);
   AUTH = `?ts=${this.TS}&apikey=${BACKEND_DATA.public_key}&hash=${this.HASH}`;
-  API_URL = `${BACKEND_DATA.host}${HttpApi.marvelCharacters}${this.AUTH}`;
+  API_URL = `${BACKEND_DATA.host}${HttpApi.marvelCharacters}`;
 
 
   constructor(private http: HttpClient) {
@@ -30,7 +30,7 @@ export class MarvelApiService {
     if (keyword) {
       params = params.append('nameStartsWith', keyword);
     }
-    return this.http.get<any>(this.API_URL, {params})
+    return this.http.get<any>(this.API_URL + this.AUTH, {params})
       .pipe(
         map((data: any) => data.data)
       );
@@ -39,5 +39,12 @@ export class MarvelApiService {
   getComicDataFromUrl(url: string) {
     url = url.split('/').pop();
     return this.http.get<any>(`${BACKEND_DATA.host}${HttpApi.marvelComicByID}${url}${this.AUTH}`);
+  }
+
+  getComicsByCharacter(id: number) {
+    return this.http.get<any>(`${this.API_URL}/${id}${HttpApi.marvelCharactersComic}${this.AUTH}`)
+      .pipe(
+        map((data: any) => data.data)
+      );
   }
 }
