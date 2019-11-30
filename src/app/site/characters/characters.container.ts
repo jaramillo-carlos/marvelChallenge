@@ -126,8 +126,12 @@ export class CharactersContainer implements OnInit, OnChanges {
 
   }
 
-  addRandomFavourites(id: string) {
-
+  addRandomFavourites(comicList) {
+    const shuffled = comicList.sort(() => 0.5 - Math.random());
+    const random = shuffled.slice(0, 3);
+    random.forEach((comic) => {
+      this.addFavourite(comic);
+    });
   }
 
   private getComicsByCharacter(id: any) {
