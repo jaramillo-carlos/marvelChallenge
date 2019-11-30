@@ -6,6 +6,7 @@ import {catchError, finalize, map} from 'rxjs/operators';
 import {Character, CharacterAdapter} from '@core/character.model';
 import {LoaderService} from '@services/loader.service';
 import {Comic} from '@core/comic.model';
+import {MatSnackBar} from '@angular/material';
 
 declare var $: any;
 
@@ -43,7 +44,6 @@ export class CharactersContainer implements OnInit, OnChanges {
   constructor(
     private marvelApiService: MarvelApiService,
     private loaderService: LoaderService,
-    // private route: ActivatedRoute,
     private adapter: CharacterAdapter
   ) {
     this.getAllFovourites();
